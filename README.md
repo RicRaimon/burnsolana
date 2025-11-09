@@ -13,32 +13,23 @@ Program ID: burnKNMLEUJ7ENqn3ASwSAKaxdwz7bXq9cDVhM72iDa
 ## Instruction Reference
 
 ### initialize_user_stats_spl
-- Seeds: ["user_stats", user, mint]
-- Accounts: user (signer, payer), SPL mint, user token account (interface), token program, system program.
 - Purpose: lazily create the PDA the first time a user burns a particular mint.
 
 ### initialize_user_stats_sol
-- Seeds: ["user_stats", user, "sol"]
-- Accounts: user signer, system program.
 - Purpose: create SOL stats PDA before calling burn_sol.
 
 ### initialize_fee_vault
-- Seeds: ["fee_vault"]
-- Accounts: payer signer, system program.
 - Purpose: create the zero-data FeeVault PDA.
 
 ### burn_spl(amount, message)
-- Accounts: user signer, token account, mint, user_stats_spl, fee_vault, token program, system program.
-- Flow: validates mint immutability + ownership, collects the fee, burns via burn_checked, updates stats, and emits BurnEvent.
+- Flow: validates mint immutability + ownership, burns via burn_checked, updates stats, and emits BurnEvent.
 - message must be ≤ 256 bytes and will appear in logs (UTF-8 recommended).
 
 ### burn_sol(lamports, message)
-- Accounts: user signer, optional WSOL ATA (closed if provided), incinerator account (1nc1nerator...), user_stats_sol, fee_vault, token program, system program.
-- Flow: optionally unwraps WSOL, enforces lamports > FEE_LAMPORTS, transfers fee to vault, transfers the rest to the incinerator, updates stats, emits event.
+- Flow: optionally unwraps WSOL, enforces lamports > FEE_LAMPORTS, transfers the rest to the incinerator, updates stats, emits event.
 
-### withdraw_fee(lamports)
-- Accounts: admin signer, fee_vault, recipient system account, system program, rent sysvar.
-- Only admins in ADMIN_KEYS can call; ensures vault stays rent-exempt.
+### withdraw_fee(lamports).
+- Only admins in ADMIN_KEYS can call;
 
 ## Interacting
 - Use the provided IDL (idl/burnsolana.json or .ts) with Anchor clients or Metaplex Umi, Shank, etc.
