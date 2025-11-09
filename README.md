@@ -41,12 +41,7 @@ Program ID: burnKNMLEUJ7ENqn3ASwSAKaxdwz7bXq9cDVhM72iDa
 - Accounts: admin signer, fee_vault, recipient system account, system program, rent sysvar.
 - Only admins in ADMIN_KEYS can call; ensures vault stays rent-exempt.
 
-## Interacting Off-Chain
+## Interacting
 - Use the provided IDL (idl/burnsolana.json or .ts) with Anchor clients or Metaplex Umi, Shank, etc.
 - For SPL burns supply the correct token program (SPL Token or Token-2022) that matches the mint.
 - Always create the stats PDA(s) and fee_vault before the first burn on a cluster to avoid AccountNotInitialized errors.
-
-## Security Notes
-- All arithmetic uses checked math and Anchor constraints, but you should still run audits before mainnet deployment.
-- withdraw_fee moves lamports via raw lamport manipulations; keep the admins’ keypairs offline and consider gating the instruction behind a multisig.
-- Client UIs should surface the flat fee and ensure messages are user-generated to avoid spoofed logs.
