@@ -1,13 +1,12 @@
 # Burn Program (burn-contract)
 
-Anchor-based Solana program that lets users provably burn either SPL tokens or native SOL while logging immutable metadata and charging a configurable protocol fee. Every burn updates a per-user statistics PDA so client apps can render lifetime totals without off-chain aggregation. Fees accumulate in a dedicated vault that a multisig-like admin set can withdraw from.
+Anchor-based Solana program that lets users provably burn either SPL tokens or native SOL while logging immutable metadata and charging a protocol fee. Every burn updates a per-user statistics PDA so client apps can render lifetime totals without off-chain aggregation.
 
 ## Features at a Glance
 - SPL & SOL burns: burn SPL tokens via burn_checked CPI or native SOL by sending to the canonical incinerator (1nc1nerator...).
 - Per-user stats: PDA seeds ["user_stats", user, mint] (SPL) or ["user_stats", user, "sol"] (SOL) capture counters and total burned amounts.
 - On-chain logging: each burn emits BurnEvent { user, mint, amount, message, timestamp } for indexers/analytics.
 - Protocol fee: flat FEE_LAMPORTS = 4_000_000 (0.004 SOL) on every burn routed to the fee_vault PDA.
-- Guarded withdrawals: only admins in ADMIN_KEYS can drain the vault via withdraw_fee.
 
 Program ID: burnKNMLEUJ7ENqn3ASwSAKaxdwz7bXq9cDVhM72iDa
 
