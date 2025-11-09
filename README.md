@@ -11,44 +11,6 @@ Anchor-based Solana program that lets users provably burn either SPL tokens or n
 
 Program ID: burnKNMLEUJ7ENqn3ASwSAKaxdwz7bXq9cDVhM72iDa
 
-## Project Structure
-burn-contract/
-├── Cargo.toml        # Anchor crate metadata
-├── Xargo.toml        # SBF toolchain config
-├── idl/              # Pre-built IDL artifacts (JSON + TypeScript)
-└── src/
-    ├── lib.rs        # Entrypoints + instruction wiring
-    ├── instructions.rs
-    ├── context.rs    # Account validation + seeds + constants
-    ├── states.rs     # PDA layouts + events
-    └── errors.rs
-
-## Prerequisites
-- Rust toolchain (rustup target add bpfel-unknown-unknown)
-- Solana CLI ≥ 1.18 (solana --version)
-- Anchor CLI 0.31.x (anchor --version)
-
-If you do not have Anchor installed yet:
-cargo install --git https://github.com/coral-xyz/anchor avm --locked
-avm install 0.31.1
-avm use 0.31.1
-
-## Build & Test
-# From repo root
-cd burn-contract
-anchor build        # produces target/deploy, target/idl
-anchor test         # spins up local validator, runs integration tests (if added)
-
-anchor build also refreshes the IDL at ./target/idl/burnsolana.json; copy it into idl/ if you need to commit the artifact:
-cp target/idl/burnsolana.json idl/
-cp target/types/burnsolana.ts idl/
-
-## Deploy
-1. Configure the desired cluster: solana config set --url https://api.mainnet-beta.solana.com
-2. Ensure the deployer keypair has enough SOL for fees.
-3. Run anchor deploy (or solana program deploy target/deploy/burnsolana.so if you prefer manual control).
-4. Record the resulting program ID and update clients if it differs from the default.
-
 ## Instruction Reference
 
 ### initialize_user_stats_spl
@@ -78,11 +40,6 @@ cp target/types/burnsolana.ts idl/
 ### withdraw_fee(lamports)
 - Accounts: admin signer, fee_vault, recipient system account, system program, rent sysvar.
 - Only admins in ADMIN_KEYS can call; ensures vault stays rent-exempt.
-
-## Constants & Governance
-- FEE_LAMPORTS: adjust inside context.rs if the protocol economics change.
-- ADMIN_KEYS: hard-coded pubkeys controlling withdraw_fee; update + redeploy for new governance.
-- INCINERATOR / WSOL: canonical addresses declared in context.rs.
 
 ## Interacting Off-Chain
 - Use the provided IDL (idl/burnsolana.json or .ts) with Anchor clients or Metaplex Umi, Shank, etc.
