@@ -1,4 +1,4 @@
-# Burn Program (burn-contract)
+# Burn Program
 
 Anchor-based Solana program that lets users provably burn either SPL tokens or native SOL while logging immutable metadata and charging a protocol fee. Every burn updates a per-user statistics PDA so client apps can render lifetime totals without off-chain aggregation.
 
