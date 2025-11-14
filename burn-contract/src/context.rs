@@ -1,7 +1,6 @@
 use crate::states::*;
 use anchor_lang::prelude::*;
 use anchor_spl::token_interface::{ Mint, TokenInterface, TokenAccount};
-use anchor_lang::solana_program::pubkey;
 
 pub const INCINERATOR: Pubkey = pubkey!("1nc1nerator11111111111111111111111111111111");
 pub const WSOL: Pubkey = pubkey!("So11111111111111111111111111111111111111112");
