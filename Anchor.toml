@@ -1,0 +1,25 @@
+[toolchain]
+package_manager = "yarn"
+
+[features]
+resolution = true
+skip-lint = false
+
+[programs.devnet]
+burnsolana = "burnKNMLEUJ7ENqn3ASwSAKaxdwz7bXq9cDVhM72iDa"
+
+[programs.localnet]
+burnsolana = "burnKNMLEUJ7ENqn3ASwSAKaxdwz7bXq9cDVhM72iDa"
+
+[programs.mainnet]
+burnsolana = "burnKNMLEUJ7ENqn3ASwSAKaxdwz7bXq9cDVhM72iDa"
+
+[registry]
+url = "https://api.mainnet-beta.solana.com"
+
+[provider]
+cluster = "mainnet"
+wallet = "~/.config/solana/burn-authority-new.json"
+
+[scripts]
+test = "../node_modules/.bin/jest --preset ts-jest"
