@@ -1,0 +1,25 @@
+[package]
+name = "burnsolana"
+version = "0.1.0"
+description = "Created with Anchor"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "burnsolana"
+
+[features]
+default = []
+cpi = ["no-entrypoint"]
+no-entrypoint = []
+no-idl = []
+no-log-ix-name = []
+idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
+
+
+[dependencies]
+anchor-derive-accounts = "0.32.1"
+anchor-lang = "0.32.1"
+anchor-spl = "0.32.1"
+solana-security-txt = "1.1.1"
+default-env = "0.1"
