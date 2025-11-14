@@ -8,6 +8,23 @@ use anchor_lang::prelude::*;
 
 declare_id!("burnKNMLEUJ7ENqn3ASwSAKaxdwz7bXq9cDVhM72iDa");
 
+#[cfg(not(feature = "no-entrypoint"))]
+use { default_env::default_env, solana_security_txt::security_txt };
+
+#[cfg(not(feature = "no-entrypoint"))]
+security_txt! {
+    name: "Burnsolana",
+    project_url: "https://burnsolana.com",
+    contacts: "email:burnsolana@gmail.com,twitter:https://x.com/burnanalos,discord:https://discord.gg/zDgT74N2Y",
+    policy: "https://github.com/RicRaimon/burnsolana/blob/main/SECURITY.md",
+
+    source_code: "https://github.com/RicRaimon/burnsolana",
+    source_revision: default_env!("GITHUB_SHA", ""),
+    source_release: default_env!("GITHUB_REF_NAME", ""),
+    auditors: "None",                  
+    acknowledgements: "None"
+}
+
 /// 4 functions in the program:
 /// 1 — PDA initialization:
 ///   1.1 — initialization for SPL
